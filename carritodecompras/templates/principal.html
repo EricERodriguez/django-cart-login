@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Carro de compras{% endblock %}
+
+{% block loguin %}
+{% if user.is_authenticated %}
+
+
+
+Hi {{ user.username }}!
+
+<a href="{% url 'logout' %}" class="nav-link">
+<button class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" type="button">Log Out</button></a>
+
+{% else %}
+  <p>No estas logueado</p>
+  <a href="{% url 'login' %}" class="nav-link">
+  <button class="btn btn-outline-success me-2" href="{% url 'login' %}" type="button">Loguear</button></a>
+  <a href="/registrarse/" class="nav-link"><button class="btn btn-outline-success me-2" href="/registrarse/" type="button">Registrarse</button></a>
+{% endif %}
+{% endblock %}
+
+
+
+{% block content %}
+
+<img src="http://d2r9epyceweg5n.cloudfront.net/stores/830/783/themes/common/logo-786803822-1551585833-b7328ab378ad45e64ae6374041aa164f1551585834.png?0" style="display: flex; justify-content: center; align-items: center; margin-left: 10%;margin-top: -10%;">
+<div class="row">
+
+  <div class="col-4">
+    <div class="row">
+      <div class="card col-6">
+        <img src="https://walmartar.vteximg.com.br/arquivos/ids/877733-1000-1000/Alimento-Adulto-Carne-Pollo-Cereales-Pedigree-15-Kg-1-7478.jpg?v=637393225752670000" class="img-fluid rounded-start" >
+      </div>
+      <div class="card col-6">
+        <div class="card-body">
+          <h5 class="card-title">Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg</h5>
+          <p class="card-text">Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="/" class="btn btn-primary">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="row">
+      <div class="card col-6">
+        <img src="https://walmartar.vteximg.com.br/arquivos/ids/888024-1000-1000/Alimento-Para-Perro-Raza-Sabor-Carne-X-15k-1-479006.jpg?v=637474476889330000" class="img-fluid rounded-start" >
+      </div>
+      <div class="card col-6">
+        <div class="card-body">
+          <h5 class="card-title">Alimento Para Perro Raza Sabor Carne X 15k</h5>
+          <p class="card-text">Alimento Para Perro Raza Sabor Carne X 15k</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="/" class="btn btn-primary">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="row g-0">
+      <div class="card col-6">
+        <img src="https://walmartar.vteximg.com.br/arquivos/ids/810880-1000-1000/Alimento-Para-Perro-Carne-Pollo-Y-Cerdo-Sabrositos-20kg---2kg-1-62720.jpg?v=636373714723530000" class="img-fluid rounded-start">
+      </div>
+      <div class="card col-6">
+        <div class="card-body">
+          <h5 class="card-title">Alimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg</h5>
+          <p class="card-text">TAlimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <a href="/" class="btn btn-primary">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

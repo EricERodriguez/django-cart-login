@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block title %}Nosotros{% endblock %}
+
+{% block loguin %}
+{% if user.is_authenticated %}
+
+
+
+Hi {{ user.username }}!
+
+<a href="{% url 'logout' %}" class="nav-link">
+<button class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" type="button">Log Out</button></a>
+
+{% else %}
+  <p>No estas logueado</p>
+  <a href="{% url 'login' %}" class="nav-link">
+  <button class="btn btn-outline-success me-2" href="{% url 'login' %}" type="button">Loguear</button></a>
+  <a href="/registrarse/" class="nav-link"><button class="btn btn-outline-success me-2" href="/registrarse/" type="button">Registrarse</button></a>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+        <!-- ================
+                  para celus
+        ==================== -->
+
+        <div class="container">
+
+
+          <section class="mt-5 wow fadeIn">
+  
+  
+            <div class="row">
+  
+  
+              <div class="col-md-6 mb-4" id="imgui">
+  
+                <img src="https://image.freepik.com/vector-gratis/ui-ux-plantilla-aplicacion-movil-color-degradado_46857-14.jpg" class="img-fluid z-depth-1-half" alt="" >
+  
+              </div>
+  
+              <div class="col-md-6 mb-4">
+  
+  
+                <h3 class="h3 mb-3">Diseñado para celulares</h3>
+                <p>Basado en el diseño responsive con
+                  <strong>bootstrap</strong>  .</p>
+                <p> Mobile First se está convirtiendo en un concepto cada vez más extendido.</p>
+  
+                <p> <strong>¿Qué conseguimos con el principio Mobile First?</strong></p>
+                <p>Si empezamos maquetando un sitio web para la versión de escritorio y un usuario se conecta desde un dispositivo, primero cargará todo el contenido utilizado en la primera versión, hasta cargar los recursos necesarios  para móvil. Por lo tanto,  lo más recomendable es empezar a maquetar para la versión más pequeña, siempre optimizando el contenido que se utilice (hojas de estilos, ficheros, imágenes…), así conseguiremos que el usuario no cargue más recursos de los necesarios, reduciendo el tiempo de carga del sitio web.</p>
+  
+  
+                <hr>
+  
+  
+  
+              </div>
+              <!--Grid column-->
+    
+            </div>
+            <!--Grid row-->
+    
+          </section>
+  
+          <!-- ================
+                    para todo         
+          ==================== -->
+  
+        <div class="container">
+  
+  
+          <section class="mt-5 wow fadeIn">
+  
+  
+            <div class="row">
+              <div class="col-md-6 mb-4">
+  
+  
+                <h3 class="h3 mb-3">Diseñado para todos los dispositivos</h3>
+                <p>Basado en el diseño responsive con
+                  <strong>bootstrap</strong>  .</p>
+                <p>El objetivo es utilizar la clase y propiedades CSS3 media queries para adaptar un único diseño a diferentes resoluciones. </p>
+                <p><strong>Media Queries</strong></p>
+                <p>Las Media Queries son las herramientas fundamentales que se encargan de aplicar diferentes estilos para diferentes dispositivos, y proporcionan la mejor experiencia para cada tipo de usuario que se encuentra navegando en tu sitio web. Nacen de la necesidad de crear breakpoints o puntos de ruptura en la hoja de estilos CSS que tengas predefinida. Permite que tu sitio Web sea manejable desde diferentes dispositivos.</p>
+  
+  
+                <hr>
+  
+  
+  
+              </div>
+  
+              <div class="col-md-6 mb-4" id="imgui">
+  
+                <img src="data:image/png;base64,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" class="img-fluid z-depth-1-half" alt="" >
+  
+              </div>
+  
+  
+              <!--Grid column-->
+    
+            </div>
+            <!--Grid row-->
+    
+          </section>
+  
+  
+          <!--Section: Main info-->
+    
+          <hr class="my-5">
+    
+          <!--Section: Main features & Quick Start-->
+          <section>
+    
+            <h3 class="h3 text-center mb-5" style="text-shadow: 1px 1px 6px rgb(58, 56, 56);"><strong>Tecnologia implementada</strong> </h3>
+    
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+    
+              <!--Grid column-->
+              <div class="col-lg-6 col-md-12 px-4">
+                
+                <!--MainFirst row-->
+                <div class="row">
+                  <div class="col-1 mr-3">
+                    <i class="fab fa-python fa-2x indigo-text"></i>
+                  </div>
+                  <div class="col-10">
+                    <h5 class="feature-title" style="margin-left: 10px;">Django</h5>
+                    <p class="grey-text">Django es un framework de desarrollo web de código abierto, escrito en Python, que respeta el patrón de diseño conocido como modelo–vista–controlador (MVC). Fue desarrollado en origen para gestionar varias páginas orientadas a noticias de la World Company de Lawrence, Kansas, y fue liberada al público bajo una licencia BSD en julio de 2005; el framework fue nombrado en alusión al guitarrista de jazz gitano Django Reinhardt.</p>
+                  </div>
+                </div>
+                <!--/MainFirst row-->
+
+                <!--First row-->
+                <div class="row">
+                  <div class="col-1 mr-3">
+                    <i class="fab fa-html5 fa-2x indigo-text"></i>
+                  </div>
+                  <div class="col-10">
+                    <h5 class="feature-title" style="margin-left: 10px;">html5</h5>
+                    <p class="grey-text">HTML 5 es la quinta revisión importante del lenguaje básico de la World Wide Web, HTML. HTML5 específica dos variantes de sintaxis para HTML: una «clásica», HTML, conocida como HTML5, y una variante XHTML conocida como sintaxis XHTML 5 que deberá servirse con sintaxis XML</p>
+                  </div>
+                </div>
+                <!--/First row-->
+    
+                <div style="height:30px"></div>
+    
+                <!--Second row-->
+                <div class="row">
+                  <div class="col-1 mr-3">
+                    <i class="fab fa-css3-alt fa-2x blue-text"></i>
+                  </div>
+                  <div class="col-10">
+                    <h5 class="feature-title" style="margin-left: 10px;">CSS</h5>
+                    <p class="grey-text">CSS, en español «Hojas de estilo en cascada», es un lenguaje de diseño gráfico para definir y crear la presentación de un documento estructurado escrito en un lenguaje de marcado.
+                    </p>
+                  </div>
+                </div>
+                <!--/Second row-->
+    
+                <div style="height:30px"></div>
+    
+                <!--Third row-->
+                <div class="row">
+                  <div class="col-1 mr-3">
+                    <i class="fas fa-file-code fa-2x indigo-text"></i>
+                  </div>
+                  <div class="col-10">
+                    <h5 class="feature-title" style="margin-left: 10px;">Bootstrap 4</h5>
+                    <p class="grey-text">Bootstrap es una biblioteca multiplataforma o conjunto de herramientas de código abierto para diseño de sitios y aplicaciones web.</p>
+                  </div>
+                </div>
+                <!--/Third row-->
+    
+              </div>
+              <!--/Grid column-->
+    
+              <!--Grid column-->
+              <div class="col-lg-6 col-md-12">
+    
+                <p class="h5 text-center mb-4">Polo TIC </p>
+                <div class="embed-responsive embed-responsive-16by9">
+                  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/d4nOQdK2XDQ" allowfullscreen style="width: 100%; height: 250px;"></iframe>
+                </div>
+                <p><strong>Polo TIC  </strong>  Misiones es un proyecto provincial de innovación industrial que desarrolla su primera experiencia en el Parque Industrial y de la Innovación Posadas. Con la finalidad de cambiar la matriz productiva de la provincia orientada a las nuevas tecnologías se planificó como un espacio clave para pensar Misiones de cara al futuro. El Polo se sustenta sobre distintas bases que lo definen como único en su tipo en la región. En primer termino como lugar de capacitaciones en programación en diversos lenguajes y niveles, testing, modelado 3D, impresión 3D, desarrollo de aplicaciones móviles, lenguaje audiovisual, manejo y construcción de drones, robótica, electrónica aplicada y automatización industrial. En segundo lugar se pensó en un espacio físico donde se radiquen empresas de base tecnológica y para ello ofrece 16 oficinas destinadas a emprendedores y startups. El tercer pilar es el trabajo colaborativo donde se dispone de un gran espacio de coworking con capacidad para 80 personas, con todos los servicios y conectividad de alta velocidad.
+
+                  Como centro de desarrollo e innovación para la industria y producción misionera, el objetivo del Polo es volcar el aprendizaje de las capacitaciones y la experiencia de las empresas miembro, a una aplicación práctica que necesite la industria y el productor local.</p>
+              </div>
+              <!--/Grid column-->
+    
+            </div>
+            <!--/Grid row-->
+    
+          </section>
+          <!--Section: Main features & Quick Start-->
+  
+  
+  
+        
+
+{% endblock %}
+
+

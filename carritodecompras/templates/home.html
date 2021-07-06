@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+
+{% block title %}Carro de compras{% endblock %}
+
+{% block loguin %}
+{% if user.is_authenticated %}
+
+
+
+Hi {{ user.username }}!
+
+<a href="{% url 'logout' %}" class="nav-link">
+<button class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" type="button">Log Out</button></a>
+
+{% else %}
+  <p>No estas logueado</p>
+  <a href="{% url 'login' %}" class="nav-link">
+  <button class="btn btn-outline-success me-2" href="{% url 'login' %}" type="button">Loguear</button></a>
+  <a href="/registrarse/" class="nav-link"><button class="btn btn-outline-success me-2" href="/registrarse/" type="button">Registrarse</button></a>
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    {% if user.is_superuser %}
+
+    hola {{ user.username }} se a identificado un super usuario
+
+    <input type="text" id="text1"></input>
+    <input type="button" id="button1" value="Add" onclick="add_element_to_array();"></input>
+    <input type="button" id="button2" value="Display" onclick="display_array();"></input>
+    
+    <div id="Result"></div>
+
+    <script>
+        var x = 0;
+        var array = Array();
+
+        function add_element_to_array()
+        {
+        array[x] = document.getElementById("text1").value;
+        alert("Element: " + array[x] + " Added at index " + x);
+        x++;
+        document.getElementById("text1").value = "";
+        }
+
+        function display_array()
+        {
+        var e = "<hr/>";
+        
+        for (var y=0; y<array.length; y++)
+        {
+            e += " " + (y+10) + " " + array[y] + "<br/>";
+        }
+        document.getElementById("Result").innerHTML = e;
+        }
+
+        baseDeDatos.push({id: 11,
+                  nombre: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg',
+                  precio: 2609,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877733-1000-1000/Alimento-Adulto-Carne-Pollo-Cereales-Pedigree-15-Kg-1-7478.jpg?v=637393225752670000',
+                  info: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg'})
+    </script>
+
+
+    {% endif %}
+
+  <div class="container">
+
+    
+    
+      <div class="row ">
+          <!-- Elementos generados a partir del JSON -->
+          <main id="items" class="col-sm-8 row"></main>
+          
+          <!-- Carrito -->
+          <aside class="col-sm-4" style="position: fixed;margin-left: 50%;">
+              <h2>Carrito</h2>
+              
+              <!-- Elementos del carrito -->
+              <ul id="carrito" class="list-group"></ul>
+              <hr>
+              <!-- Precio total -->
+              <p class="text-right" style="font-size: 2rem;">Total: &dollar;<span id="total" ></span></p>
+              <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+              <button id="boton-comprar" class="btn btn-danger" onclick="ConfirmDemo()">Comprar</button>
+          </aside>
+      </div>
+  </div>
+
+  
+    <script>
+
+        
+      //funcion boton comprar
+      function ConfirmDemo() {
+            //Ingresamos un mensaje a mostrar
+            var mensaje = confirm(`¿Desea comprar?`);
+            //Detectamos si el usuario acepto el mensaje
+            if (mensaje) {
+            alert("¡Gracias por su compra!");
+            }
+            //Detectamos si el usuario denegó el mensaje
+            else {
+            alert("¡Haz cancelado la compra!");
+            }
+          }
+
+
+        window.onload = function () {
+          // Variables
+          const baseDeDatos = [
+              {
+                  id: 1,
+                  nombre: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg',
+                  precio: 2609,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877733-1000-1000/Alimento-Adulto-Carne-Pollo-Cereales-Pedigree-15-Kg-1-7478.jpg?v=637393225752670000',
+                  info: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg'
+              },
+              {
+                  id: 2,
+                  nombre: 'Alimento Para Perro Raza Sabor Carne X 15k',
+                  precio: 2078,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/888024-1000-1000/Alimento-Para-Perro-Raza-Sabor-Carne-X-15k-1-479006.jpg?v=637474476889330000',
+                  info: 'Alimento Para Perro Raza Sabor Carne X 15k'
+              },
+              {
+                  id: 3,
+                  nombre: 'Alimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg',
+                  precio: 1949,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/810880-1000-1000/Alimento-Para-Perro-Carne-Pollo-Y-Cerdo-Sabrositos-20kg---2kg-1-62720.jpg?v=636373714723530000',
+                  info: 'Alimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg'
+              },
+              {
+                  id: 4,
+                  nombre: 'Alimento Champ Mix Carnes 15kg',
+                  precio: 1753,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877793-1000-1000/Alimento-Champ-Mix-Carnes-15kg-1-475370.jpg?v=637393260190800000',
+                  info: 'Alimento Champ Mix Carnes 15kg'
+              },
+              {
+                  id: 5,
+                  nombre: 'Pedigree Alimento Seco Para Perro Cachorro 8 Kg',
+                  precio: 1601,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/874569-1000-1000/Pedigree-Alimento-Seco-Para-Perro-Cachorro-8-Kg-1-475089.jpg?v=637375981577800000',
+                  info: 'Pedigree Alimento Seco Para Perro Cachorro 8 Kg'
+              },
+              {
+                  id: 6,
+                  nombre: 'Alimento Gato Whiskas Pollo 3kg',
+                  precio: 908,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877770-1000-1000/Alimento-Gato-Whiskas-Pollo-3kg-1-470661.jpg?v=637393227414200000',
+                  info: 'Alimento Gato Whiskas Pollo 3kg'
+              },
+              {
+                  id: 7,
+                  nombre: 'Alimento Gato Whiskas Pescado 3kg',
+                  precio: 908,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877763-1000-1000/Alimento-Gato-Whiskas-Pescado-3kg-1-470654.jpg?v=637393227243630000',
+                  info: 'Alimento Gato Whiskas Pescado 3kg'
+              },
+              {
+                  id: 8,
+                  nombre: 'Alimento Para Gato Raza Pescado Omega 3 Y 6 X 3 Kg',
+                  precio: 710,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/888026-1000-1000/Alimento-Para-Gato-Raza-Pescado-Omega-3-Y-6-X-3-Kg-1-479008.jpg?v=637474476896000000',
+                  info: 'Alimento Para Gato Raza Pescado Omega 3 Y 6 X 3 Kg'
+              },
+              {
+                  id: 9,
+                  nombre: 'Alimento Para Gato Sabrositos Mix X 3 Kg',
+                  precio: 628,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/892173-1000-1000/Alimento-Para-Gato-Sabrositos-Mix-X-3-Kg-1-479661.jpg?v=637527109779370000',
+                  info: 'Alimento Para Gato Sabrositos Mix X 3 Kg'
+              }
+
+          ];
+
+          baseDeDatos.push({id: 11,
+                  nombre: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg',
+                  precio: 2609,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877733-1000-1000/Alimento-Adulto-Carne-Pollo-Cereales-Pedigree-15-Kg-1-7478.jpg?v=637393225752670000',
+                  info: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg'})
+
+          let carrito = [];
+          let total = 0;
+          const DOMitems = document.querySelector('#items');
+          const DOMcarrito = document.querySelector('#carrito');
+          const DOMtotal = document.querySelector('#total');
+          const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+
+          // Funciones
+
+          /**
+          * Dibuja todos los productos a partir de la base de datos. No confundir con el carrito
+          */
+          function renderizarProductos() {
+              baseDeDatos.forEach((info) => {
+                  // Estructura
+                  const miNodo = document.createElement('div');
+                  miNodo.classList.add('card', 'col-sm-4');
+                  // Body
+                  const miNodoCardBody = document.createElement('div');
+                  miNodoCardBody.classList.add('card-body');
+                  // Titulo
+                  const miNodoTitle = document.createElement('h5');
+                  miNodoTitle.classList.add('card-title');
+                  miNodoTitle.textContent = info.nombre;
+                  // Imagen
+                  const miNodoImagen = document.createElement('img');
+                  miNodoImagen.classList.add('img-fluid');
+                  miNodoImagen.setAttribute('src', info.imagen);
+                  // Precio
+                  const miNodoPrecio = document.createElement('p');
+                  miNodoPrecio.classList.add('card-text');
+                  miNodoPrecio.textContent = info.precio + '$';
+
+                  //info productos
+
+                  const miNodoInfo = document.createElement('p');
+                  miNodoInfo.classList.add('card-text');
+                  miNodoInfo.textContent = info.info;
+                  // Boton 
+                  const miNodoBoton = document.createElement('button');
+                  miNodoBoton.classList.add('btn', 'btn-success');
+                  miNodoBoton.textContent = 'Agregar al carrito +';
+                  miNodoBoton.setAttribute('marcador', info.id);
+                  miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                  // Insertamos
+                  miNodoCardBody.appendChild(miNodoImagen);
+                  miNodoCardBody.appendChild(miNodoTitle);
+                  miNodoCardBody.appendChild(miNodoPrecio);
+                  miNodoCardBody.appendChild(miNodoInfo);
+                  miNodoCardBody.appendChild(miNodoBoton);
+                  miNodo.appendChild(miNodoCardBody);
+                  DOMitems.appendChild(miNodo);
+              });
+          }
+
+          /**
+          * Evento para añadir un producto al carrito de la compra
+          */
+          function anyadirProductoAlCarrito(evento) {
+              // Anyadimos el Nodo a nuestro carrito
+              carrito.push(evento.target.getAttribute('marcador'))
+              // Calculo el total
+              calcularTotal();
+              // Actualizamos el carrito 
+              renderizarCarrito();
+
+          }
+
+          /**
+          * Dibuja todos los productos guardados en el carrito
+          */
+          function renderizarCarrito() {
+              // Vaciamos todo el html
+              DOMcarrito.textContent = '';
+              // Quitamos los duplicados
+              const carritoSinDuplicados = [...new Set(carrito)];
+              // Generamos los Nodos a partir de carrito
+              carritoSinDuplicados.forEach((item) => {
+                  // Obtenemos el item que necesitamos de la variable base de datos
+                  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                      // ¿Coincide las id? Solo puede existir un caso
+                      return itemBaseDatos.id === parseInt(item);
+                  });
+                  // Cuenta el número de veces que se repite el producto
+                  const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                      // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
+                      return itemId === item ? total += 1 : total;
+                  }, 0);
+                  // Creamos el nodo del item del carrito
+                  const miNodo = document.createElement('li');
+                  miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                  miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} -` + `${(miItem[0].precio)*(numeroUnidadesItem)}$ `;
+                  // Boton de borrar
+                  const miBoton = document.createElement('button');
+                  miBoton.classList.add('btn', 'mx-2');
+                  miBoton.textContent = 'X';
+                  miBoton.style.marginLeft = '1rem';
+                  miBoton.dataset.item = item;
+                  miBoton.addEventListener('click', borrarItemCarrito);
+                  // Mezclamos nodos
+                  miNodo.appendChild(miBoton);
+                  DOMcarrito.appendChild(miNodo);
+              });
+          }
+
+          /**
+          * Evento para borrar un elemento del carrito
+          */
+          function borrarItemCarrito(evento) {
+              // Obtenemos el producto ID que hay en el boton pulsado
+              const id = evento.target.dataset.item;
+              // Borramos todos los productos
+              carrito = carrito.filter((carritoId) => {
+                  return carritoId !== id;
+              });
+              // volvemos a renderizar
+              renderizarCarrito();
+              // Calculamos de nuevo el precio
+              calcularTotal();
+          }
+
+          /**
+          * Calcula el precio total teniendo en cuenta los productos repetidos
+          */
+          function calcularTotal() {
+              // Limpiamos precio anterior
+              total = 0;
+              // Recorremos el array del carrito
+              carrito.forEach((item) => {
+                  // De cada elemento obtenemos su precio
+                  const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                      return itemBaseDatos.id === parseInt(item);
+                  });
+                  total = total + miItem[0].precio;
+              });
+              // Renderizamos el precio en el HTML
+              DOMtotal.textContent = total.toFixed(2);
+          }
+
+          /**
+          * Varia el carrito y vuelve a dibujarlo
+          */
+          function vaciarCarrito() {
+              // Limpiamos los productos guardados
+              carrito = [];
+              // Renderizamos los cambios
+              renderizarCarrito();
+              calcularTotal();
+          }
+
+          // Eventos
+          DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+          // Inicio
+          renderizarProductos();
+
+
+
+        } 
+
+    </script>
+    
+
+    
+    {% else %}
+  
+  <div class="card" style=" display: flex; justify-content: center; align-items: center;">
+    <div class="card-body" >
+      <img src="https://i2.wp.com/lovagnini.com/wp-content/themes/car-manager/images/not-login-icon.png?w=1170&ssl=1" class="rounded mx-auto d-block" alt="...">
+      <h5 class="card-title" style=" display: flex; justify-content: center; align-items: center;">No estas logueado</h5>
+      <a href="{% url 'login' %}" style=" display: flex; justify-content: center; align-items: center;text-decoration: none"><button type="button" class="btn btn-secondary btn-lg">Log In</button></a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
