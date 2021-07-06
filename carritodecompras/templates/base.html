@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   
 </head>
-<body>
+<body style="background-color: rgb(205, 240, 240);">
   <main>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/principal">JAGUARETE</a>
+        <img >
+        <a class="navbar-brand" href="/principal" style="background-image: url('https://www.pngkey.com/png/full/968-9680529_participating-teams-la-verne-leopards-logo.png'); background-size: 100% 100%; color: white;-webkit-text-stroke: 0.5px rgb(0, 0, 0);">JAGUARETE</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,6 +27,11 @@
             <a class="nav-link active" aria-current="page" href="/principal">Inicio</a>
             <a class="nav-link" href="/aboutus">Nosotros</a>
             <a class="nav-link" href="/">Carrito</a>
+            <form class="form-inline my-2 my-lg-0" style="display: contents">
+              <input type='search' id='search-input' placeholder='Search'>
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <div id='search-results'></div>
           </div>
         </div>
         {% block loguin %}
@@ -37,7 +43,6 @@
     {% block content %}
 
     {% endblock %}
-
   </main>
   
 
@@ -74,6 +79,91 @@
 </footer>
 <!-- Footer -->
 
+<script>
+  
+
+
+
+
+const items = document.getElementById('items');
+const searchBar = document.getElementById('searchBar');
+let baseDeDatos = [{
+                  id: 1,
+                  nombre: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg',
+                  precio: 2609,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877733-1000-1000/Alimento-Adulto-Carne-Pollo-Cereales-Pedigree-15-Kg-1-7478.jpg?v=637393225752670000',
+                  info: 'Alimento Adulto Carne Pollo Cereales Pedigree 15 Kg'
+              },
+              {
+                  id: 2,
+                  nombre: 'Alimento Para Perro Raza Sabor Carne X 15k',
+                  precio: 2078,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/888024-1000-1000/Alimento-Para-Perro-Raza-Sabor-Carne-X-15k-1-479006.jpg?v=637474476889330000',
+                  info: 'Alimento Para Perro Raza Sabor Carne X 15k'
+              },
+              {
+                  id: 3,
+                  nombre: 'Alimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg',
+                  precio: 1949,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/810880-1000-1000/Alimento-Para-Perro-Carne-Pollo-Y-Cerdo-Sabrositos-20kg---2kg-1-62720.jpg?v=636373714723530000',
+                  info: 'Alimento Para Perro Carne Pollo Y Cerdo Sabrositos 20kg + 2kg'
+              },
+              {
+                  id: 4,
+                  nombre: 'Alimento Champ Mix Carnes 15kg',
+                  precio: 1753,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877793-1000-1000/Alimento-Champ-Mix-Carnes-15kg-1-475370.jpg?v=637393260190800000',
+                  info: 'Alimento Champ Mix Carnes 15kg'
+              },
+              {
+                  id: 5,
+                  nombre: 'Pedigree Alimento Seco Para Perro Cachorro 8 Kg',
+                  precio: 1601,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/874569-1000-1000/Pedigree-Alimento-Seco-Para-Perro-Cachorro-8-Kg-1-475089.jpg?v=637375981577800000',
+                  info: 'Pedigree Alimento Seco Para Perro Cachorro 8 Kg'
+              },
+              {
+                  id: 6,
+                  nombre: 'Alimento Gato Whiskas Pollo 3kg',
+                  precio: 908,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877770-1000-1000/Alimento-Gato-Whiskas-Pollo-3kg-1-470661.jpg?v=637393227414200000',
+                  info: 'Alimento Gato Whiskas Pollo 3kg'
+              },
+              {
+                  id: 7,
+                  nombre: 'Alimento Gato Whiskas Pescado 3kg',
+                  precio: 908,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/877763-1000-1000/Alimento-Gato-Whiskas-Pescado-3kg-1-470654.jpg?v=637393227243630000',
+                  info: 'Alimento Gato Whiskas Pescado 3kg'
+              },
+              {
+                  id: 8,
+                  nombre: 'Alimento Para Gato Raza Pescado Omega 3 Y 6 X 3 Kg',
+                  precio: 710,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/888026-1000-1000/Alimento-Para-Gato-Raza-Pescado-Omega-3-Y-6-X-3-Kg-1-479008.jpg?v=637474476896000000',
+                  info: 'Alimento Para Gato Raza Pescado Omega 3 Y 6 X 3 Kg'
+              },
+              {
+                  id: 9,
+                  nombre: 'Alimento Para Gato Sabrositos Mix X 3 Kg',
+                  precio: 628,
+                  imagen: 'https://walmartar.vteximg.com.br/arquivos/ids/892173-1000-1000/Alimento-Para-Gato-Sabrositos-Mix-X-3-Kg-1-479661.jpg?v=637527109779370000',
+                  info: 'Alimento Para Gato Sabrositos Mix X 3 Kg'
+              }];
+
+              ("#search-input").on("keyup", function(){
+              var searchFor = $("#search-input").val().toLowerCase();
+                var results = [];
+                for(var i=0;i<baseDeDatos.length;i++){
+                  if(baseDeDatos[i].nombre.toLowerCase().indexOf(searchFor) > -1)
+                    results.push("<a href='"+baseDeDatos[i].imagen+"' target='_blank'>"+baseDeDatos[i].nombre+"</a>")
+                }
+                if(results.length == 0)
+                  $("#search-results").html("No Results Found");
+                else
+                  $("#search-results").html(results.join("<br>"));
+              });
+  </script>
 
 </body>
 </html>
