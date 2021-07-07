@@ -7,10 +7,10 @@
 
 
 
-Hi {{ user.username }}!
+Hola {{ user.username }}!
 
 <a href="{% url 'logout' %}" class="nav-link">
-<button class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" type="button">Log Out</button></a>
+<button class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" type="button">Desloguear</button></a>
 
 {% else %}
   <p>No estas logueado</p>
